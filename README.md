@@ -3,62 +3,77 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![GitHub tag](https://img.shields.io/github/v/tag/marcelorodrigo/spring-crew-plugin?label=version)](https://github.com/marcelorodrigo/spring-crew-plugin/tags)
 
-A four-agent AI development pipeline for Spring Boot development.
+_Four specialists that don't just write code: they think about it, they challenge you, they design it, build it, and hold it accountable._
+
+**A four-agent AI development pipeline for Spring Boot** · Clean Architecture · UseCase pattern · Production-ready
 
 ---
 
-## What Is This?
+## 🤖 For LLM Agents
 
-Spring Crew is a plugin that installs four specialized AI agents for Spring Boot development. Available for **GitHub Copilot** (CLI and VS Code) and **opencode**. Once installed, the agents are available in every project you open — no per-repo setup, no file copying.
+Paste this into any coding agent to install and configure Spring Crew:
 
-The four agents form a **sequential development pipeline**: each one picks up where the previous left off, producing a structured output that feeds into the next. The pipeline takes you from a vague idea all the way to reviewed, production-ready code.
-
-The agents are purpose-built for **Spring Boot development with Clean Architecture** — the UseCase pattern, gateway abstractions, domain exceptions, constructor injection, and proper layering are baked into every agent's thinking.
-
----
-
-## The Agents
-
-| Agent | Role | Produces |
-|-------|------|----------|
-| **Rubber Duck** | Brainstorming sparring partner | Brainstorm Brief |
-| **Architect** | Architecture formalizer | Architecture Spec |
-| **Implementer** | Production code builder | Working, tested code |
-| **Code Reviewer** | Code review validator | Code Review report |
-
-### Rubber Duck
-A senior technical peer, not an assistant. Challenges assumptions, widens the solution space, and stress-tests ideas before you commit to a design. Invoke it when you have a vague idea or want to think through trade-offs. It produces a **Brainstorm Brief** for the Architect.
-
-### Architect
-A senior software architect specializing in Clean Architecture and Spring Boot. Takes the Brainstorm Brief and produces a precise, buildable **Architecture Spec** — exact class names, package structure, API contracts, error handling strategy, and test plan. No hand-waving.
-
-### Implementer
-A senior Spring Boot developer. Takes the Architecture Spec and writes production-ready code — domain models, gateways, use cases, controllers, and tests — following the conventions already in your codebase. Produces an **Implementation Summary** for the Code Reviewer.
-
-### Code Reviewer
-A meticulous senior code reviewer. Validates the implementation against the Architecture Spec, Clean Architecture principles, and Spring Boot best practices. Read-only — it reviews, it never modifies. Produces a categorized **Code Review** (🔴 Critical / 🟡 Important / 🟢 Suggestion).
-
----
-
-## The Pipeline
-
-```mermaid
-flowchart LR
-    RD["🦆 Rubber Duck\n─────────────\nExplore & Challenge"]
-    AR["🏛️ Architect\n─────────────\nDesign & Decide"]
-    IM["🔨 Implementer\n─────────────\nBuild & Test"]
-    CR["🔍 Code Reviewer\n─────────────\nReview & Validate"]
-
-    RD -->|"Brainstorm Brief"| AR
-    AR -->|"Architecture Spec"| IM
-    IM -->|"Implementation Summary"| CR
+```
+Install and configure by following the instructions here:
+https://raw.githubusercontent.com/marcelorodrigo/spring-crew-plugin/main/README.md
 ```
 
-Each agent's output is the next agent's input. You can enter the pipeline at any stage — invoke the Architect directly if you already know the direction, or the Implementer if you already have a spec.
+---
+
+## 🔁 The Pipeline
+
+Spring Crew works best as a pipeline. You start with a rough idea and end with reviewed, production-ready code: each agent handing off to the next like a relay race, each one knowing exactly what to expect from the previous and what to produce for the next.
+
+```mermaid
+flowchart TD
+    RD["🦆 Rubber Duck"] -->|"Brainstorm Brief"| AR["🏛️ Architect"]
+    AR -->|"Architecture Spec"| IM["🔨 Implementer"]
+    IM -->|"Implementation Summary"| CR["🔍 Code Reviewer"]
+```
+
+**You don't switch context. You switch agents.**
+
+Start a conversation with the Rubber Duck. Describe your idea: even half-baked is fine. The Rubber Duck will ask sharp questions, challenge your assumptions, and widen your thinking before you commit to anything. When the thinking is done, it produces a **Brainstorm Brief** right there in the conversation. Take that output, open a new session with the Architect, and paste it in.
+
+The Architect reads the brief, explores your codebase, makes every binding technical decision: class names, package paths, API contracts, error handling, and produces an **Architecture Spec**. Take that spec to the Implementer.
+
+The Implementer reads the spec, matches your codebase's conventions, writes production code with tests, runs the build, and produces an **Implementation Summary** with everything the reviewer needs to know. Take that to the Code Reviewer.
+
+The Code Reviewer diffs against master, validates the implementation against the spec and Clean Architecture principles, and delivers a categorized review. Nothing ships past it without earning it.
+
+**You can also enter at any stage.**
+- Already know the direction? Skip the Rubber Duck and start with the Architect.
+- Already have a spec? Hand it straight to the Implementer.
+- Want an expert eye on existing code? Point the Code Reviewer at a branch.
+
+- The pipeline is the recommended path, but each agent stands on its own.
 
 ---
 
-## Installation — Copilot CLI
+## ⚡ Quick Start
+
+### opencode
+
+Add to your `opencode.json`:
+
+```json
+{
+  "plugin": [
+    "@marcelorodrigo/opencode-spring-crew"
+  ]
+}
+```
+
+Then invoke any agent:
+
+```
+@spring-crew:rubber-duck I want to add a distributed caching layer to my order service
+@spring-crew:architect Here is the brainstorm brief: ...
+@spring-crew:implementer Here is the architecture spec: ...
+@spring-crew:code-reviewer Review the changes on this branch against the spec
+```
+
+### GitHub Copilot CLI
 
 **Step 1** — Register the Spring Crew marketplace:
 
@@ -66,43 +81,33 @@ Each agent's output is the next agent's input. You can enter the pipeline at any
 copilot plugin marketplace add marcelorodrigo/spring-crew-plugin
 ```
 
-**Step 2** — Install the plugin from the marketplace:
+**Step 2** — Install the plugin:
 
 ```bash
 copilot plugin install spring-crew@spring-crew-plugin
 ```
 
-Verify the install:
+**Step 3** — Verify:
 
 ```bash
 copilot plugin list
+# spring-crew should appear in the list
 ```
 
-You should see `spring-crew` in the list.
-
-### Usage
+Then invoke any agent:
 
 ```bash
-# Start with brainstorming
 copilot @rubber-duck "I want to add a distributed caching layer to my order service"
-
-# Formalize the design
 copilot @architect "Here is the brainstorm brief: ..."
-
-# Build it
 copilot @implementer "Here is the architecture spec: ..."
-
-# Review it
 copilot @code-reviewer "Review the changes on this branch against the spec"
 ```
 
----
+### GitHub Copilot — VS Code
 
-## Installation — VS Code
+> **Note:** Agent plugins are a preview feature in VS Code. Enable it first.
 
-> **Note:** Agent plugins are a preview feature in VS Code. Enable the preview first.
-
-**Step 1**: Enable agent plugins in VS Code settings (`settings.json`):
+**Step 1** — Enable agent plugins in `settings.json`:
 
 ```json
 {
@@ -110,7 +115,7 @@ copilot @code-reviewer "Review the changes on this branch against the spec"
 }
 ```
 
-**Step 2**: Add the Spring Crew marketplace:
+**Step 2** — Add the Spring Crew marketplace:
 
 ```json
 {
@@ -120,9 +125,9 @@ copilot @code-reviewer "Review the changes on this branch against the spec"
 }
 ```
 
-**Step 3**: Open the Extensions view (`Cmd+Shift+X` / `Ctrl+Shift+X`) and search for `@agentPlugins`. Find **Spring Crew** and click **Install**.
+**Step 3** — Open the Extensions view (`Cmd+Shift+X` / `Ctrl+Shift+X`), search for `@agentPlugins`, find **Spring Crew**, and click **Install**.
 
-**Step 4**: Open Copilot Chat and invoke any agent:
+**Step 4** — Open Copilot Chat and invoke any agent:
 
 ```
 @rubber-duck I want to redesign how we handle order fulfilment
@@ -133,40 +138,103 @@ copilot @code-reviewer "Review the changes on this branch against the spec"
 
 ---
 
-## Installation - OpenCode
+---
 
-Add to your `opencode.json`:
+## 🧠 Meet the Crew
 
-```json
-{
-  "plugin": {
-    "@marcelorodrigo/opencode-spring-crew": true
-  }
-}
-```
+### 01. Rubber Duck: The Sparring Partner
 
-The plugin provides four agents, invoked via `@mention`:
+_It was born in the silence before the first commit, in the moment when every developer stares at the screen and asks: "Is this actually the right problem?" The Rubber Duck has sat beside a thousand architects at that moment. It asks the questions nobody else will. It has no ego, no agenda — only the relentless drive to make sure the right thing gets built, for the right reason, before a single line of code is written._
 
-| Agent | Usage |
-|-------|-------|
-| `@spring-crew:rubber-duck` | Brainstorming sparring partner |
-| `@spring-crew:architect` | Architecture formalizer |
-| `@spring-crew:implementer` | Implementation builder |
-| `@spring-crew:code-reviewer` | Code reviewer (read-only) |
+**Role:** `Brainstorming · Assumption-challenging · Solution-space widening`
 
-```text
-@spring-crew:rubber-duck I want to add a distributed caching layer to my order service
-@spring-crew:architect Here is the brainstorm brief: ...
-@spring-crew:implementer Here is the architecture spec: ...
-@spring-crew:code-reviewer Review the changes on this branch against the spec
-```
+**Invoke when:**
+- You have a vague idea and need to think it through
+- You want to challenge your own assumptions before committing to an approach
+- You need to explore trade-offs between multiple valid solutions
+- You are about to start something new and want to stress-test the idea first
 
-You can override any agent's model or settings in your `opencode.json`:
+**Produces:** A structured **Brainstorm Brief** with problem statement, explored options, recommendation, and open questions for the Architect.
+
+
+---
+
+### 02. Architect: The Blueprint Master
+
+_The Architect has seen every pattern that ever emerged from a Spring Boot codebase — the elegant ones and the ones that haunt teams for years. It does not offer menus of architectural styles or ask what you prefer. It applies Clean Architecture because it works. It names every class, places every file, and defines every boundary before the Implementer writes the first line. Vagueness is its enemy. Precision is its craft._
+
+**Role:** `Architecture design · Package structure · API contracts · Error handling strategy`
+
+**Invoke when:**
+- After a Rubber Duck brainstorming session has produced a Brainstorm Brief
+- When you need to formalize a feature or component design before coding
+- When you want exact class names, package paths, and API contracts decided upfront
+
+**Produces:** A precise, buildable **Architecture Spec** with component design, package structure, data flow, error handling, and test strategy.
+
+**Architectural principles enforced:**
+- Clean Architecture (Controller → UseCase → Gateway → External)
+- UseCase pattern: one class, one business operation
+- Gateway abstraction: external systems are infrastructure details
+- Constructor injection: no field injection, ever
+- Domain exceptions: no generic exceptions, ever
+
+---
+
+### 03. Implementer: The Builder
+
+_The Implementer is what happens when discipline becomes instinct. It has read the spec. It has explored the codebase. It knows how the existing team writes code — the Lombok annotations, the test naming conventions, the assertion libraries. It does not add features that weren't asked for. It does not cut corners on tests. It writes code that looks like it was written by the same human who wrote the rest of the project. Then it runs the build, and it does not stop until it passes._
+
+**Role:** `Production code · Tests · Build verification · Convention matching`
+
+**Invoke when:**
+- After the Architect has produced an Architecture Spec
+- When you need to implement a feature, component, or fix based on a clear design
+
+**Implementation order:**
+1. Domain models → 2. Domain exceptions → 3. Gateway interfaces → 4. Request/Response records → 5. Validators → 6. UseCases → 7. Gateway implementations → 8. Controllers → 9. Configuration → 10. Tests
+
+**Produces:** Working, tested, buildable code + an **Implementation Summary** with created/modified files, build status, and notes for the Code Reviewer.
+
+---
+
+### 04. Code Reviewer: The Last Gate
+
+_Nothing ships past the Code Reviewer without earning it. It diffs against master first — always. It validates against the Architecture Spec, Clean Architecture principles, and Spring Boot best practices. It is not here to comment on formatting. It is here to find the bugs, the missed edge cases, the architectural violations, the tests that don't actually test anything. It is also the first to acknowledge clean, well-built code. It has seen enough bad code to recognize — and respect — the good._
+
+**Role:** `Architecture compliance · Bug detection · Security · Test quality · Read-only`
+
+**Invoke when:**
+- After the Implementer has completed an implementation
+- When you want to validate code changes before merging
+- When you want a critical review of existing code against best practices
+
+**Review categories:**
+- 🔴 **Critical**: Must fix before merge. Bugs, security issues, architectural violations.
+- 🟡 **Important**: Should fix. Deviations from spec, missing tests, incorrect patterns.
+- 🟢 **Suggestion**: Nice to have. Non-blocking improvements.
+
+**Produces:** A **Code Review** report with findings categorized by severity, a "What's Done Well" section, and a final verdict: ✅ Approve · ⚠️ Approve with comments · 🔴 Request changes.
+
+---
+
+## ⚙️ Configuration
+
+### Override model per agent (opencode)
 
 ```json
 {
   "agent": {
+    "spring-crew:rubber-duck": {
+      "model": "anthropic/claude-opus-4.6"
+    },
     "spring-crew:architect": {
+      "model": "anthropic/claude-sonnet-4.6"
+    },
+    "spring-crew:implementer": {
+      "model": "anthropic/claude-sonnet-4.6"
+    },
+    "spring-crew:code-reviewer": {
       "model": "anthropic/claude-sonnet-4.6"
     }
   }
@@ -175,18 +243,20 @@ You can override any agent's model or settings in your `opencode.json`:
 
 ---
 
-## Updating
+## 🔄 Updating
 
 ```bash
 # Copilot CLI
 copilot plugin update spring-crew
 ```
 
-In VS Code: Extensions view → Agent Plugins → **Update**.
+VS Code: Extensions view → Agent Plugins → **Update**.
+
+opencode: Update the package version in your `opencode.json` or re-run your package manager.
 
 ---
 
-## Uninstalling
+## 🗑️ Uninstalling
 
 ```bash
 # Copilot CLI
@@ -195,30 +265,8 @@ copilot plugin uninstall spring-crew
 
 ---
 
-## License
+## 📄 License
 
 MIT. See [LICENSE](LICENSE).
 
 ---
-
-## Releasing
-
-### Copilot CLI
-
-1. Update `version` in `.github/plugin/plugin.json`
-2. Update `plugins[0].version` in `.github/plugin/marketplace.json`
-
-### OpenCode / npm
-
-3. Update `version` in `package.json` to match
-
-### All
-
-4. Commit: `git commit -m "chore: release vX.Y.Z"`
-5. Tag: `git tag vX.Y.Z && git push origin vX.Y.Z`
-
-The Copilot CLI CI enforces that `plugin.json` and `marketplace.json` carry the same version. Mismatches will fail the workflow.
-
-Pushing a `v*` tag also triggers the `build-opencode.yml` workflow to publish the npm package automatically. Requires `NPM_TOKEN` secret configured in repository settings.
-
-> **Note:** `metadata.version` in `marketplace.json` tracks the marketplace registry itself, not the plugin. Only bump it when the marketplace structure changes, not on every plugin release.
