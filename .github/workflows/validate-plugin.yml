@@ -46,7 +46,7 @@ jobs:
           if not plugin.get("name"):
               errors.append("plugin.json: 'name' field is missing or empty")
           elif not re.match(r'^[a-zA-Z0-9-]+$', plugin["name"]):
-              errors.append(f"plugin.json: 'name' field '{plugin['name']}' contains invalid characters (only A-z, 0-9, dash allowed)")
+              errors.append(f"plugin.json: 'name' field '{plugin['name']}' contains invalid characters (only A-Z, a-z, 0-9, and '-' are allowed)")
 
           if not plugin.get("description"):
               errors.append("plugin.json: 'description' field is missing or empty")
@@ -69,9 +69,12 @@ jobs:
           python3 - <<'EOF'
           import json, sys
 
+          with open(".github/plugin/plugin.json") as f:
+              plugin = json.load(f)
           with open(".github/plugin/marketplace.json") as f:
               market = json.load(f)
 
+          plugin_name = plugin.get("name", "")
           errors = []
 
           if not market.get("name"):
@@ -80,6 +83,13 @@ jobs:
               errors.append("marketplace.json: 'owner' field is missing")
           if not market.get("plugins") or not isinstance(market["plugins"], list) or len(market["plugins"]) == 0:
               errors.append("marketplace.json: 'plugins' array is missing or empty")
+          else:
+              for i, entry in enumerate(market["plugins"]):
+                  for field in ("name", "version", "source"):
+                      if not entry.get(field):
+                          errors.append(f"marketplace.json: plugins[{i}].'{field}' is missing or empty")
+                  if entry.get("name") and entry["name"] != plugin_name:
+                      errors.append(f"marketplace.json: plugins[{i}].name '{entry['name']}' does not match plugin.json name '{plugin_name}'")
 
           if errors:
               for e in errors:
@@ -100,13 +110,18 @@ jobs:
               market = json.load(f)
 
           plugin_version = plugin.get("version", "")
-          market_version = market.get("plugins", [{}])[0].get("version", "") if market.get("plugins") else ""
 
-          if plugin_version != market_version:
-              print(f"ERROR: Version mismatch — plugin.json has '{plugin_version}', marketplace.json plugins[0] has '{market_version}'")
+          mismatches = []
+          for i, entry in enumerate(market.get("plugins", [])):
+              entry_version = entry.get("version", "")
+              if plugin_version != entry_version:
+                  mismatches.append(f"plugins[{i}] has '{entry_version}'")
+
+          if mismatches:
+              print(f"ERROR: Version mismatch — plugin.json has '{plugin_version}', but: {', '.join(mismatches)}")
               sys.exit(1)
 
-          print(f"Version consistency OK: both at '{plugin_version}'")
+          print(f"Version consistency OK: all entries at '{plugin_version}'")
           EOF
 
       - name: Validate agent files have required frontmatter
@@ -116,6 +131,10 @@ jobs:
 
           agents_dir = "agents"
           errors = []
+
+          if not os.path.isdir(agents_dir):
+              print(f"ERROR: '{agents_dir}' directory not found")
+              sys.exit(1)
 
           agent_files = [f for f in os.listdir(agents_dir) if f.endswith(".agent.md")]
 
@@ -127,6 +146,8 @@ jobs:
               path = os.path.join(agents_dir, filename)
               with open(path) as f:
                   content = f.read()
+
+              content = content.replace('\r\n', '\n').replace('\r', '\n')
 
               if not content.startswith("---"):
                   errors.append(f"{path}: Missing YAML frontmatter (must start with ---)")
