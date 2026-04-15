@@ -1,0 +1,35 @@
+{
+  "name": "spring-crew-plugin",
+  "version": "0.0.1",
+  "description": "Spring Boot development agents for opencode — Rubber Duck, Architect, Implementer, Code Reviewer",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "spring-boot",
+    "clean-architecture"
+  ],
+  "author": "Marcelo Rodrigo",
+  "license": "MIT",
+  "homepage": "https://github.com/marcelorodrigo/spring-crew-plugin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcelorodrigo/spring-crew-plugin.git"
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "1.4.6",
+    "@opencode-ai/sdk": "1.4.6",
+    "tsup": "^8.0.0",
+    "typescript": "^5.7.0"
+  }
+}
