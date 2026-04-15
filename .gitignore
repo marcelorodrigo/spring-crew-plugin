@@ -1,3 +1,7 @@
 # opencode plugin build output
 dist/
 node_modules/
+
+# ide
+.idea/
+*.iml
