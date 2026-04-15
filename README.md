@@ -154,7 +154,7 @@ The plugin provides four agents, invoked via `@mention`:
 | `@spring-crew:implementer` | Implementation builder |
 | `@spring-crew:code-reviewer` | Code reviewer (read-only) |
 
-```
+```text
 @spring-crew:rubber-duck I want to add a distributed caching layer to my order service
 @spring-crew:architect Here is the brainstorm brief: ...
 @spring-crew:implementer Here is the architecture spec: ...

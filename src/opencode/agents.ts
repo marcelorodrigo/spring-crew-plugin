@@ -21,11 +21,17 @@ function buildAgentConfigs(): Record<string, AgentConfig> {
   const agents: Record<string, AgentConfig> = {};
 
   for (const [key, raw] of Object.entries(sources)) {
-    const { name, description, prompt } = parseAgentMd(raw);
-    agents[key] = {
-      description: `${name} — ${description}`,
-      prompt,
-    };
+    try {
+      const { name, description, prompt } = parseAgentMd(raw);
+      agents[key] = {
+        description: `${name} — ${description}`,
+        prompt,
+      };
+    } catch (err) {
+      throw new Error(
+        `Failed to parse agent "${key}": ${err instanceof Error ? err.message : String(err)}`,
+      );
+    }
   }
 
   return agents;
