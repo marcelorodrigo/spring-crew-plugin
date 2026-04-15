@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![GitHub tag](https://img.shields.io/github/v/tag/marcelorodrigo/spring-crew-plugin?label=version)](https://github.com/marcelorodrigo/spring-crew-plugin/tags)
 
-A four-agent AI development pipeline for Spring Boot — powered by GitHub Copilot and [opencode](https://github.com/sst/opencode).
+A four-agent AI development pipeline for Spring Boot development.
 
 ---
 
@@ -102,7 +102,7 @@ copilot @code-reviewer "Review the changes on this branch against the spec"
 
 > **Note:** Agent plugins are a preview feature in VS Code. Enable the preview first.
 
-**Step 1** — Enable agent plugins in VS Code settings (`settings.json`):
+**Step 1**: Enable agent plugins in VS Code settings (`settings.json`):
 
 ```json
 {
@@ -110,7 +110,7 @@ copilot @code-reviewer "Review the changes on this branch against the spec"
 }
 ```
 
-**Step 2** — Add the Spring Crew marketplace:
+**Step 2**: Add the Spring Crew marketplace:
 
 ```json
 {
@@ -120,9 +120,9 @@ copilot @code-reviewer "Review the changes on this branch against the spec"
 }
 ```
 
-**Step 3** — Open the Extensions view (`Cmd+Shift+X` / `Ctrl+Shift+X`) and search for `@agentPlugins`. Find **Spring Crew** and click **Install**.
+**Step 3**: Open the Extensions view (`Cmd+Shift+X` / `Ctrl+Shift+X`) and search for `@agentPlugins`. Find **Spring Crew** and click **Install**.
 
-**Step 4** — Open Copilot Chat and invoke any agent:
+**Step 4**: Open Copilot Chat and invoke any agent:
 
 ```
 @rubber-duck I want to redesign how we handle order fulfilment
@@ -133,7 +133,7 @@ copilot @code-reviewer "Review the changes on this branch against the spec"
 
 ---
 
-## Installation — OpenCode
+## Installation - OpenCode
 
 Add to your `opencode.json`:
 
@@ -167,7 +167,7 @@ You can override any agent's model or settings in your `opencode.json`:
 {
   "agent": {
     "spring-crew:architect": {
-      "model": "anthropic/claude-sonnet-4-20250514"
+      "model": "anthropic/claude-sonnet-4.6"
     }
   }
 }
@@ -195,19 +195,9 @@ copilot plugin uninstall spring-crew
 
 ---
 
-## Requirements
-
-- A GitHub Copilot subscription (Individual, Business, or Enterprise), **or**
-- [opencode](https://github.com/sst/opencode) installed
-- **Copilot CLI** — for terminal-based usage, or
-- **VS Code** with `chat.plugins.enabled: true` (preview feature), or
-- **opencode** — terminal-based AI coding assistant
-
----
-
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).
 
 ---
 
