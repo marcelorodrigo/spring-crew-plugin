@@ -42,15 +42,16 @@ A meticulous senior code reviewer. Validates the implementation against the Arch
 
 ## The Pipeline
 
-```
-┌─────────────┐    Brainstorm    ┌─────────────┐  Architecture  ┌─────────────┐    Code &     ┌─────────────┐
-│  Rubber     │      Brief       │  Architect  │      Spec      │ Implementer │    Tests      │    Code     │
-│    Duck     │ ──────────────▶  │             │ ─────────────▶ │             │ ────────────▶ │  Reviewer   │
-│             │                  │             │                │             │               │             │
-└─────────────┘                  └─────────────┘                └─────────────┘               └─────────────┘
+```mermaid
+flowchart LR
+    RD["🦆 Rubber Duck\n─────────────\nExplore & Challenge"]
+    AR["🏛️ Architect\n─────────────\nDesign & Decide"]
+    IM["🔨 Implementer\n─────────────\nBuild & Test"]
+    CR["🔍 Code Reviewer\n─────────────\nReview & Validate"]
 
-  Explore &                        Design &                       Build &                        Review &
-  Challenge                        Decide                         Test                           Validate
+    RD -->|"Brainstorm Brief"| AR
+    AR -->|"Architecture Spec"| IM
+    IM -->|"Implementation Summary"| CR
 ```
 
 Each agent's output is the next agent's input. You can enter the pipeline at any stage — invoke the Architect directly if you already know the direction, or the Implementer if you already have a spec.
@@ -155,3 +156,16 @@ copilot plugin uninstall spring-crew
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+---
+
+## Releasing
+
+1. Update `version` in `.github/plugin/plugin.json`
+2. Update `plugins[0].version` in `.github/plugin/marketplace.json`
+3. Commit: `git commit -m "chore: release vX.Y.Z"`
+4. Tag: `git tag vX.Y.Z && git push origin vX.Y.Z`
+
+The CI enforces that both files carry the same version. Mismatches will fail the workflow.
+
+> **Note:** `metadata.version` in `marketplace.json` tracks the marketplace registry itself, not the plugin. Only bump it when the marketplace structure changes, not on every plugin release.
