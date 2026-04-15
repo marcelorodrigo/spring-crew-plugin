@@ -6,13 +6,13 @@
   },
   "metadata": {
     "description": "Marketplace for the Spring Crew AI development pipeline plugin",
-    "version": "0.0.1"
+    "version": "0.0.2"
   },
   "plugins": [
     {
       "name": "spring-crew",
-      "description": "Four-agent AI crew for Spring Boot development with Clean Architecture. Includes Rubber Duck (brainstorming), Architect (design), Implementer (coding), and Code Reviewer — a full development pipeline in one plugin.",
-      "version": "0.0.1",
+      "description": "Four-agent AI crew for Spring Boot development with Clean Architecture. Includes Rubber Duck (brainstorming), Architect (design), Implementer (coding), and Code Reviewer: a full development pipeline in one plugin.",
+      "version": "0.0.2",
       "source": ".",
       "author": {
         "name": "Marcelo Rodrigo",
