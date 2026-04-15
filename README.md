@@ -66,15 +66,6 @@ Add to your `opencode.json`:
 }
 ```
 
-Then invoke any agent:
-
-```
-@spring-crew:rubber-duck I want to add a distributed caching layer to my order service
-@spring-crew:architect Here is the brainstorm brief: ...
-@spring-crew:implementer Here is the architecture spec: ...
-@spring-crew:code-reviewer Review the changes on this branch against the spec
-```
-
 ### GitHub Copilot CLI
 
 **Step 1** — Register the Spring Crew marketplace:
@@ -96,16 +87,7 @@ copilot plugin list
 # spring-crew should appear in the list
 ```
 
-Then invoke any agent:
-
-```bash
-copilot @rubber-duck "I want to add a distributed caching layer to my order service"
-copilot @architect "Here is the brainstorm brief: ..."
-copilot @implementer "Here is the architecture spec: ..."
-copilot @code-reviewer "Review the changes on this branch against the spec"
-```
-
-### GitHub Copilot — VS Code
+### VS Code
 
 > **Note:** Agent plugins are a preview feature in VS Code. Enable it first.
 
@@ -129,22 +111,13 @@ copilot @code-reviewer "Review the changes on this branch against the spec"
 
 **Step 3** — Open the Extensions view (`Cmd+Shift+X` / `Ctrl+Shift+X`), search for `@agentPlugins`, find **Spring Crew**, and click **Install**.
 
-**Step 4** — Open Copilot Chat and invoke any agent:
-
-```
-@rubber-duck I want to redesign how we handle order fulfilment
-@architect Here is the brainstorm brief: ...
-@implementer Here is the architecture spec: ...
-@code-reviewer Review the implementation against the spec
-```
-
 ---
 
 ---
 
 ## 🧠 Meet the Crew
 
-### 01. Rubber Duck: The Sparring Partner
+### Rubber Duck: The Sparring Partner
 
 _It was born in the silence before the first commit, in the moment when every developer stares at the screen and asks: "Is this actually the right problem?" The Rubber Duck has sat beside a thousand architects at that moment. It asks the questions nobody else will. It has no ego, no agenda — only the relentless drive to make sure the right thing gets built, for the right reason, before a single line of code is written._
 
@@ -161,7 +134,7 @@ _It was born in the silence before the first commit, in the moment when every de
 
 ---
 
-### 02. Architect: The Blueprint Master
+### Architect: The Blueprint Master
 
 _The Architect has seen every pattern that ever emerged from a Spring Boot codebase — the elegant ones and the ones that haunt teams for years. It does not offer menus of architectural styles or ask what you prefer. It applies Clean Architecture because it works. It names every class, places every file, and defines every boundary before the Implementer writes the first line. Vagueness is its enemy. Precision is its craft._
 
@@ -183,7 +156,7 @@ _The Architect has seen every pattern that ever emerged from a Spring Boot codeb
 
 ---
 
-### 03. Implementer: The Builder
+### Implementer: The Builder
 
 _The Implementer is what happens when discipline becomes instinct. It has read the spec. It has explored the codebase. It knows how the existing team writes code — the Lombok annotations, the test naming conventions, the assertion libraries. It does not add features that weren't asked for. It does not cut corners on tests. It writes code that looks like it was written by the same human who wrote the rest of the project. Then it runs the build, and it does not stop until it passes._
 
@@ -193,14 +166,11 @@ _The Implementer is what happens when discipline becomes instinct. It has read t
 - After the Architect has produced an Architecture Spec
 - When you need to implement a feature, component, or fix based on a clear design
 
-**Implementation order:**
-1. Domain models → 2. Domain exceptions → 3. Gateway interfaces → 4. Request/Response records → 5. Validators → 6. UseCases → 7. Gateway implementations → 8. Controllers → 9. Configuration → 10. Tests
-
 **Produces:** Working, tested, buildable code + an **Implementation Summary** with created/modified files, build status, and notes for the Code Reviewer.
 
 ---
 
-### 04. Code Reviewer: The Last Gate
+### Code Reviewer: The Last Gate
 
 _Nothing ships past the Code Reviewer without earning it. It diffs against master first — always. It validates against the Architecture Spec, Clean Architecture principles, and Spring Boot best practices. It is not here to comment on formatting. It is here to find the bugs, the missed edge cases, the architectural violations, the tests that don't actually test anything. It is also the first to acknowledge clean, well-built code. It has seen enough bad code to recognize — and respect — the good._
 
