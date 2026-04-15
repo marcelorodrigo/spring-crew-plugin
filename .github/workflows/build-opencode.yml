@@ -21,6 +21,7 @@ on:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -46,6 +47,7 @@ jobs:
 
   publish:
     needs: build
+    name: Publish
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     permissions:
