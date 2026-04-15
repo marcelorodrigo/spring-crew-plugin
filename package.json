@@ -1,5 +1,5 @@
 {
-  "name": "spring-crew-plugin",
+  "name": "@marcelorodrigo/opencode-spring-crew",
   "version": "0.0.1",
   "description": "Spring Boot development agents for opencode — Rubber Duck, Architect, Implementer, Code Reviewer",
   "type": "module",
