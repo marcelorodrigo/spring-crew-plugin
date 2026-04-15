@@ -140,7 +140,7 @@ Add to your `opencode.json`:
 ```json
 {
   "plugin": {
-    "spring-crew-plugin": true
+    "@marcelorodrigo/opencode-spring-crew": true
   }
 }
 ```
