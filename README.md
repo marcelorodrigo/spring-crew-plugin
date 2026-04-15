@@ -66,6 +66,27 @@ Add to your `opencode.json`:
 }
 ```
 
+### Claude Code
+
+**Step 1** — Add the Spring Crew marketplace:
+
+```bash
+claude plugin marketplace add marcelorodrigo/spring-crew-plugin
+```
+
+**Step 2** — Install the plugin:
+
+```bash
+claude plugin install spring-crew@spring-crew-plugin
+```
+
+**Step 3** — Verify:
+
+```bash
+/agents
+# Rubber Duck, Architect, Implementer, Code Reviewer should appear
+```
+
 ### GitHub Copilot CLI
 
 **Step 1** — Register the Spring Crew marketplace:
