@@ -22,7 +22,9 @@ https://raw.githubusercontent.com/marcelorodrigo/spring-crew-plugin/main/README.
 
 ## 🔁 The Pipeline
 
-Spring Crew works best as a pipeline. You start with a rough idea and end with reviewed, production-ready code: each agent handing off to the next like a relay race, each one knowing exactly what to expect from the previous and what to produce for the next.
+**Spring Crew** works best as a pipeline.
+
+You start with a rough idea and end with reviewed, production-ready code: each agent handing off to the next like a relay race, each one knowing exactly what to expect from the previous and what to produce for the next.
 
 ```mermaid
 flowchart TD
@@ -31,15 +33,15 @@ flowchart TD
     IM -->|"Implementation Summary"| CR["🔍 Code Reviewer"]
 ```
 
-**You don't switch context. You switch agents.**
+### You don't switch context. You switch agents.
 
-Start a conversation with the Rubber Duck. Describe your idea: even half-baked is fine. The Rubber Duck will ask sharp questions, challenge your assumptions, and widen your thinking before you commit to anything. When the thinking is done, it produces a **Brainstorm Brief** right there in the conversation. Take that output, open a new session with the Architect, and paste it in.
+1. Start a conversation with the _Rubber Duck_: describe your idea, even half-baked or a rough draft is fine. The Rubber Duck will ask sharp questions, challenge your assumptions, and widen your thinking before you commit to anything. When the thinking is done, it produces a **Brainstorm Brief** right there in the conversation. Take that output, open a new session with the Architect, and paste it in.
 
-The Architect reads the brief, explores your codebase, makes every binding technical decision: class names, package paths, API contracts, error handling, and produces an **Architecture Spec**. Take that spec to the Implementer.
+2. The _Architect_ reads the brief, explores your codebase, makes every binding technical decision: class names, package paths, API contracts, error handling, and produces an **Architecture Spec**. Take that spec to the Implementer.
 
-The Implementer reads the spec, matches your codebase's conventions, writes production code with tests, runs the build, and produces an **Implementation Summary** with everything the reviewer needs to know. Take that to the Code Reviewer.
+3. The _Implementer_ reads the spec, matches your codebase's conventions, writes production code with tests, runs the build, and produces an **Implementation Summary** with everything the reviewer needs to know. Take that to the Code Reviewer.
 
-The Code Reviewer diffs against master, validates the implementation against the spec and Clean Architecture principles, and delivers a categorized review. Nothing ships past it without earning it.
+4. The _Code Reviewer_ diffs against `master`, validates the implementation against the spec and Clean Architecture principles, and delivers a categorized review. Nothing ships past it without earning it.
 
 **You can also enter at any stage.**
 - Already know the direction? Skip the Rubber Duck and start with the Architect.
