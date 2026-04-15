@@ -60,8 +60,16 @@ Each agent's output is the next agent's input. You can enter the pipeline at any
 
 ## Installation — Copilot CLI
 
+**Step 1** — Register the Spring Crew marketplace:
+
 ```bash
-copilot plugin install marcelorodrigo/spring-crew-plugin
+copilot plugin marketplace add marcelorodrigo/spring-crew-plugin
+```
+
+**Step 2** — Install the plugin from the marketplace:
+
+```bash
+copilot plugin install spring-crew@spring-crew-plugin
 ```
 
 Verify the install:
