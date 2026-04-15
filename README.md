@@ -3,13 +3,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![GitHub tag](https://img.shields.io/github/v/tag/marcelorodrigo/spring-crew-plugin?label=version)](https://github.com/marcelorodrigo/spring-crew-plugin/tags)
 
-A four-agent AI development pipeline for Spring Boot — powered by GitHub Copilot.
+A four-agent AI development pipeline for Spring Boot — powered by GitHub Copilot and [opencode](https://github.com/sst/opencode).
 
 ---
 
 ## What Is This?
 
-Spring Crew is a GitHub Copilot plugin that installs four specialized AI agents onto your machine globally. Once installed, the agents are available in every project you open — no per-repo setup, no file copying.
+Spring Crew is a plugin that installs four specialized AI agents for Spring Boot development. Available for **GitHub Copilot** (CLI and VS Code) and **opencode**. Once installed, the agents are available in every project you open — no per-repo setup, no file copying.
 
 The four agents form a **sequential development pipeline**: each one picks up where the previous left off, producing a structured output that feeds into the next. The pipeline takes you from a vague idea all the way to reviewed, production-ready code.
 
@@ -133,6 +133,48 @@ copilot @code-reviewer "Review the changes on this branch against the spec"
 
 ---
 
+## Installation — OpenCode
+
+Add to your `opencode.json`:
+
+```json
+{
+  "plugin": {
+    "spring-crew-plugin": true
+  }
+}
+```
+
+The plugin provides four agents, invoked via `@mention`:
+
+| Agent | Usage |
+|-------|-------|
+| `@spring-crew:rubber-duck` | Brainstorming sparring partner |
+| `@spring-crew:architect` | Architecture formalizer |
+| `@spring-crew:implementer` | Implementation builder |
+| `@spring-crew:code-reviewer` | Code reviewer (read-only) |
+
+```
+@spring-crew:rubber-duck I want to add a distributed caching layer to my order service
+@spring-crew:architect Here is the brainstorm brief: ...
+@spring-crew:implementer Here is the architecture spec: ...
+@spring-crew:code-reviewer Review the changes on this branch against the spec
+```
+
+You can override any agent's model or settings in your `opencode.json`:
+
+```json
+{
+  "agent": {
+    "spring-crew:architect": {
+      "model": "anthropic/claude-sonnet-4-20250514"
+    }
+  }
+}
+```
+
+---
+
 ## Updating
 
 ```bash
@@ -155,9 +197,11 @@ copilot plugin uninstall spring-crew
 
 ## Requirements
 
-- A GitHub Copilot subscription (Individual, Business, or Enterprise)
+- A GitHub Copilot subscription (Individual, Business, or Enterprise), **or**
+- [opencode](https://github.com/sst/opencode) installed
 - **Copilot CLI** — for terminal-based usage, or
-- **VS Code** with `chat.plugins.enabled: true` (preview feature)
+- **VS Code** with `chat.plugins.enabled: true` (preview feature), or
+- **opencode** — terminal-based AI coding assistant
 
 ---
 
@@ -169,11 +213,22 @@ MIT — see [LICENSE](LICENSE).
 
 ## Releasing
 
+### Copilot CLI
+
 1. Update `version` in `.github/plugin/plugin.json`
 2. Update `plugins[0].version` in `.github/plugin/marketplace.json`
-3. Commit: `git commit -m "chore: release vX.Y.Z"`
-4. Tag: `git tag vX.Y.Z && git push origin vX.Y.Z`
 
-The CI enforces that both files carry the same version. Mismatches will fail the workflow.
+### OpenCode / npm
+
+3. Update `version` in `package.json` to match
+
+### All
+
+4. Commit: `git commit -m "chore: release vX.Y.Z"`
+5. Tag: `git tag vX.Y.Z && git push origin vX.Y.Z`
+
+The Copilot CLI CI enforces that `plugin.json` and `marketplace.json` carry the same version. Mismatches will fail the workflow.
+
+Pushing a `v*` tag also triggers the `build-opencode.yml` workflow to publish the npm package automatically. Requires `NPM_TOKEN` secret configured in repository settings.
 
 > **Note:** `metadata.version` in `marketplace.json` tracks the marketplace registry itself, not the plugin. Only bump it when the marketplace structure changes, not on every plugin release.
