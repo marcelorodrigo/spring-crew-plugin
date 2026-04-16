@@ -15,7 +15,7 @@ Paste this into any coding agent to install and configure Spring Crew:
 
 ```
 Install and configure by following the instructions here:
-https://raw.githubusercontent.com/marcelorodrigo/spring-crew-plugin/main/README.md
+https://raw.githubusercontent.com/marcelorodrigo/spring-crew-plugin/master/README.md
 ```
 
 ---
