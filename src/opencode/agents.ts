@@ -2,6 +2,7 @@ import rubberDuckMd from '../../agents/rubber-duck.agent.md';
 import architectMd from '../../agents/architect.agent.md';
 import implementerMd from '../../agents/implementer.agent.md';
 import codeReviewerMd from '../../agents/code-reviewer.agent.md';
+import orchestratorMd from '../../agents/orchestrator.agent.md';
 
 import { parseAgentMd } from './parse-agent-md';
 
@@ -16,6 +17,7 @@ function buildAgentConfigs(): Record<string, AgentConfig> {
     'spring-crew:architect': architectMd,
     'spring-crew:implementer': implementerMd,
     'spring-crew:code-reviewer': codeReviewerMd,
+    'spring-crew:orchestrator': orchestratorMd,
   };
 
   const agents: Record<string, AgentConfig> = {};

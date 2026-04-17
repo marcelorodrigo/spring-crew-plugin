@@ -3,9 +3,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![GitHub tag](https://img.shields.io/github/v/tag/marcelorodrigo/spring-crew-plugin?label=version)](https://github.com/marcelorodrigo/spring-crew-plugin/tags)
 
-_Four specialists that don't just write code: they think about it, they challenge you, they design it, build it, and hold it accountable._
+_Five specialists that don't just write code: they think about it, they challenge you, they design it, build it, and hold it accountable._
 
-**A four-agent AI development pipeline for Spring Boot** · Clean Architecture · UseCase pattern · Production-ready
+**A five-agent AI development pipeline for Spring Boot** · Clean Architecture · UseCase pattern · Production-ready · Automated workflow orchestration
 
 ---
 
@@ -28,12 +28,58 @@ You start with a rough idea and end with reviewed, production-ready code: each a
 
 ```mermaid
 flowchart TD
-    RD["🦆 Rubber Duck"] -->|"Brainstorm Brief"| AR["🏛️ Architect"]
-    AR -->|"Architecture Spec"| IM["🔨 Implementer"]
-    IM -->|"Implementation Summary"| CR["🔍 Code Reviewer"]
+    User["👤 User Request"] -->|"Jira Ticket / Feature"| ORCH["🎯 Orchestrator"]
+    ORCH -->|"Delegates"| RD["🦆 Rubber Duck"]
+    RD -->|"Brainstorm Brief"| ORCH
+    ORCH -->|"Approval Gate (HITL)"| ORCH
+    ORCH -->|"Delegates"| AR["🏛️ Architect"]
+    AR -->|"Architecture Spec"| ORCH
+    ORCH -->|"Approval Gate (HITL)"| ORCH
+    ORCH -->|"Delegates"| IM["🔨 Implementer"]
+    IM -->|"Implementation Summary"| ORCH
+    ORCH -->|"Approval Gate (HITL)"| ORCH
+    ORCH -->|"Delegates"| CR["🔍 Code Reviewer"]
+    CR -->|"Code Review"| ORCH
+    ORCH -->|"Final Report"| User
 ```
 
-### You don't switch context. You switch agents.
+### Two ways to work: Manual or Automated
+
+**Option 1: Orchestrator (Automated Pipeline)**
+
+Use the **Orchestrator** agent to manage the full pipeline automatically:
+
+```bash
+# Start the orchestrator
+/agent spring-crew:orchestrator
+
+# Provide your task
+Task: JIRA-123: Add user authentication with JWT tokens
+```
+
+The Orchestrator will:
+- ✅ Manage the full pipeline from Rubber Duck → Architect → Implementer → Code Reviewer
+- ✅ Validate artifacts between each step
+- ✅ Request approval at each stage (human-in-the-loop mode)
+- ✅ Or run autonomously without approval gates (autonomous mode)
+- ✅ Generate a complete execution report with all artifacts
+
+**Two execution modes:**
+
+1. **Human-in-the-Loop (default):** Pauses after each agent for approval
+   ```
+   Task: Add user authentication
+   ```
+
+2. **Autonomous:** Runs full pipeline without interruption
+   ```
+   Mode: autonomous
+   Task: Add logging to PaymentService
+   ```
+
+**Option 2: Manual Agent Switching**
+
+You don't switch context. You switch agents.
 
 1. Start a conversation with the _Rubber Duck_: describe your idea, even half-baked or a rough draft is fine. The Rubber Duck will ask sharp questions, challenge your assumptions, and widen your thinking before you commit to anything. When the thinking is done, it produces a **Brainstorm Brief** right there in the conversation. Take that output, open a new session with the Architect, and paste it in.
 
@@ -47,8 +93,9 @@ flowchart TD
 - Already know the direction? Skip the Rubber Duck and start with the Architect.
 - Already have a spec? Hand it straight to the Implementer.
 - Want an expert eye on existing code? Point the Code Reviewer at a branch.
+- Use the Orchestrator to automate the full pipeline.
 
-- The pipeline is the recommended path, but each agent stands on its own.
+The pipeline is the recommended path, but each agent stands on its own.
 
 ---
 
@@ -138,6 +185,51 @@ copilot plugin list
 
 ## 🧠 Meet the Crew
 
+### Orchestrator: The Pipeline Manager
+
+_It was born from the need to coordinate. In the chaos of context-switching between agents, the Orchestrator emerged—a workflow manager that understands one truth: great software comes from specialists doing what they do best, in the right order, at the right time. It doesn't write code. It doesn't design systems. It doesn't review. It coordinates. It validates. It enforces the handoff protocol. It ensures nothing ships without passing through every gate._
+
+**Role:** `Workflow coordination · Pipeline management · Artifact validation · Approval gates`
+
+**Invoke when:**
+- You want to execute the full 4-agent pipeline from a Jira ticket or feature request
+- You need structured handoffs with validation between each phase
+- You want human approval gates at each step (human-in-the-loop mode)
+- You want fully automated execution without interruption (autonomous mode)
+- You need a complete audit trail of the development workflow
+
+**Two execution modes:**
+
+1. **Human-in-the-Loop (default):**
+   - Pauses after Rubber Duck, Architect, and Implementer for approval
+   - You can approve, reject, or request modifications
+   - Complete control over each phase
+   - Best for: critical features, learning, quality assurance
+
+2. **Autonomous:**
+   - Executes all 4 agents sequentially without pausing
+   - Validates artifacts automatically
+   - Aborts on validation failure after 3 retries
+   - Best for: routine tasks, batch processing, rapid prototyping
+
+**What it does:**
+- ✅ Routes tasks to the appropriate specialist
+- ✅ Validates artifact structure between phases
+- ✅ Manages approval gates (HITL mode)
+- ✅ Tracks complete workflow state
+- ✅ Generates comprehensive execution reports
+
+**What it does NOT do:**
+- ❌ Write code or provide code snippets
+- ❌ Design architecture or make technical decisions
+- ❌ Brainstorm solutions or answer technical questions
+- ❌ Review code or identify bugs
+- ❌ Modify files or run commands
+
+**Produces:** A comprehensive **Workflow Execution Report** with execution timeline, all artifacts (Brainstorm Brief, Architecture Spec, Implementation Summary, Code Review), approval history, and next steps.
+
+---
+
 ### Rubber Duck: The Sparring Partner
 
 _It was born in the silence before the first commit, in the moment when every developer stares at the screen and asks: "Is this actually the right problem?" The Rubber Duck has sat beside a thousand architects at that moment. It asks the questions nobody else will. It has no ego, no agenda — only the relentless drive to make sure the right thing gets built, for the right reason, before a single line of code is written._
@@ -218,6 +310,9 @@ _Nothing ships past the Code Reviewer without earning it. It diffs against maste
 ```json
 {
   "agent": {
+    "spring-crew:orchestrator": {
+      "model": "anthropic/claude-sonnet-4.6"
+    },
     "spring-crew:rubber-duck": {
       "model": "anthropic/claude-opus-4.6"
     },
