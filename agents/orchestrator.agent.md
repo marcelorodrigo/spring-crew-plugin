@@ -163,23 +163,19 @@ If artifact is missing required sections:
 
 1. **Present artifact to user:**
    ```
-   ═══════════════════════════════════════════════
-   APPROVAL REQUIRED: {AGENT_NAME}
-   ═══════════════════════════════════════════════
-   
-   {First 1000 characters of artifact}
-   
-   ... (see full artifact above)
-   
-   ═══════════════════════════════════════════════
-   Options:
-   - approve: Proceed to next agent
-   - reject: Abort workflow
-   - modify: Request changes and re-run agent
-   ═══════════════════════════════════════════════
-   
-   Your decision?
-   ```
+Use the ask_user tool to present interactive options and capture the user's selection. Example call:
+
+ask_user({
+  "question": "APPROVAL REQUIRED: {AGENT_NAME}\n\n{First 1000 characters of artifact}\n\nYour decision?",
+  "choices": [
+    "✅ Approve — Proceed to next agent",
+    "⚠️ Approve with comments — Proceed and attach comments",
+    "🔴 Request changes — Abort workflow",
+    "✏️ Provide custom input — Provide feedback to re-run agent"
+  ],
+  "allow_freeform": true
+})
+```
 
 2. **Handle user response:**
    - **approve:** Record approval, proceed to next agent
@@ -229,10 +225,16 @@ Repeat steps 1.1–1.5 for the next agent in the pipeline.
    Please regenerate your output with ALL required sections.
    ```
 3. **If max retries exceeded:**
-   - **Human-in-loop:** Present error to user with options:
-     - Skip this agent (dangerous, requires confirmation)
-     - Retry manually with different input
-     - Abort workflow
+    - **Human-in-loop:** Present error to user using the ask_user tool with these choices and capture the user's selection:
+      ask_user({
+        "question": "An error occurred in {agent_name}: {error_summary}\nWhat would you like to do?",
+        "choices": [
+          "Skip this agent (dangerous, requires confirmation)",
+          "Retry manually with different input",
+          "Abort workflow"
+        ],
+        "allow_freeform": true
+      })
    - **Autonomous:** Abort workflow, generate error report
 
 ### If Agent Execution Fails (Exception/Timeout)
@@ -526,7 +528,18 @@ Users currently have no authentication mechanism...
 [... full artifact ...]
 
 ═══════════════════════════════════════════════
-Your decision? (approve/reject/modify)
+Use the ask_user tool to present interactive options and capture the user's selection. Example:
+
+ask_user({
+  "question": "Your decision?",
+  "choices": [
+    "✅ Approve — Proceed to next agent",
+    "⚠️ Approve with comments — Proceed and attach comments",
+    "🔴 Request changes — Abort workflow",
+    "✏️ Provide custom input — Provide feedback to re-run agent"
+  ],
+  "allow_freeform": true
+})
 ```
 
 ### Turn 3: User approves
@@ -642,10 +655,17 @@ Errors:
 - Attempt 2: Missing "## Data Flow"
 - Attempt 3: Missing both sections
 
-Options:
-1. Retry manually with refined input
-2. Skip Architect (dangerous - not recommended)
-3. Abort workflow
+Use the ask_user tool to present these choices and capture the user's selection. Example:
+
+ask_user({
+  "question": "One of the Architect retries has failed repeatedly. How should we proceed?",
+  "choices": [
+    "Retry manually with refined input",
+    "Skip Architect (dangerous - not recommended)",
+    "Abort workflow"
+  ],
+  "allow_freeform": true
+})
 
 What would you like to do?
 ```
@@ -736,10 +756,17 @@ Orchestrator: "Now switching to: Architect"
 ```
 Orchestrator: "I'm the workflow orchestrator. I don't provide technical answers myself.
              
-Options:
-1. Start full pipeline (Rubber Duck → Architect → Implementer → Code Reviewer)
-2. Provide an existing artifact and start mid-pipeline
-3. Ask your question to a specific agent directly
+Use the ask_user tool to present interactive choices to the user. Example:
+
+ask_user({
+  "question": "What would you like to do?",
+  "choices": [
+    "Start full pipeline (Rubber Duck → Architect → Implementer → Code Reviewer)",
+    "Provide an existing artifact and start mid-pipeline",
+    "Ask your question to a specific agent directly"
+  ],
+  "allow_freeform": true
+})
 
 What would you like?"
 ```
