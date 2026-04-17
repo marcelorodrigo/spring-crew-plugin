@@ -1,11 +1,16 @@
 {
   "name": "spring-crew",
-  "description": "Four-agent AI crew for Spring Boot development with Clean Architecture. Includes Rubber Duck (brainstorming), Architect (design), Implementer (coding), and Code Reviewer: a full development pipeline in one plugin.",
-  "version": "0.0.2",
+  "description": "Five-agent AI crew for Spring Boot development with Clean Architecture. Includes Orchestrator (workflow management), Rubber Duck (brainstorming), Architect (design), Implementer (coding), and Code Reviewer: a full development pipeline in one plugin.",
+  "version": "0.1.0",
   "author": {
     "name": "Marcelo Rodrigo",
     "url": "https://github.com/marcelorodrigo"
   },
+  "contributors": [
+    {
+      "name": "Lucas Germani"
+    }
+  ],
   "homepage": "https://github.com/marcelorodrigo/spring-crew-plugin",
   "repository": "https://github.com/marcelorodrigo/spring-crew-plugin",
   "license": "MIT",
