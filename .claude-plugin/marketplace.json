@@ -4,6 +4,7 @@
     "name": "Marcelo Rodrigo"
   },
   "metadata": {
+    "version": "0.2.0",
     "description": "Marketplace for the Spring Crew AI development pipeline — five-agent Spring Boot crew with Clean Architecture and workflow orchestration"
   },
   "plugins": [

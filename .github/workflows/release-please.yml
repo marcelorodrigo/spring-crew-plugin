@@ -1,39 +1,47 @@
-name: Build OpenCode Plugin
+name: Release Please
 
 on:
   push:
     branches: [master]
-    paths:
-      - 'src/**'
-      - 'agents/**'
-      - 'package.json'
-      - 'tsconfig.json'
-      - 'tsup.config.ts'
-  pull_request:
-    paths:
-      - 'src/**'
-      - 'agents/**'
-      - 'package.json'
-      - 'tsconfig.json'
-      - 'tsup.config.ts'
-  workflow_dispatch:
 
 concurrency:
-  group: build-${{ github.ref }}
-  cancel-in-progress: true
+  group: release-please-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  build:
-    name: Build
+  release-please:
+    name: Create release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+    steps:
+      - uses: googleapis/release-please-action@5c625bfb5d1ff62eadeeb3772007f7f66fdcf071 # v4.4.1
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    name: Publish to npm
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version-file: '.node-version'
+          registry-url: 'https://registry.npmjs.org'
 
+      - run: npm install -g npm@latest
       - run: npm ci
       - run: npm run typecheck
       - run: npm run build
@@ -52,3 +60,4 @@ jobs:
           done
           echo "All $count agent prompts verified in dist/index.js"
 
+      - run: npm publish --provenance --access public
