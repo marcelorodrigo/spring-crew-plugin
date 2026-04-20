@@ -1,6 +1,6 @@
 {
   "name": "spring-crew",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Five-agent AI crew for Spring Boot development with Clean Architecture. Includes Orchestrator (workflow management), Rubber Duck (brainstorming), Architect (design), Implementer (coding), and Code Reviewer: a full development pipeline in one plugin.",
   "author": {
     "name": "Marcelo Rodrigo",

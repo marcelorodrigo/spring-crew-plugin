@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0](https://github.com/marcelorodrigo/spring-crew-plugin/compare/opencode-spring-crew-v0.2.0...opencode-spring-crew-v0.3.0) (2026-04-20)
+
+
+### Features
+
+* Add Claude Code plugin and marketplace support ([#14](https://github.com/marcelorodrigo/spring-crew-plugin/issues/14)) ([e74515b](https://github.com/marcelorodrigo/spring-crew-plugin/commit/e74515ba8d7938443afb07197f05a199e398f638))
+* add orchestrator agent for automated pipeline execution ([#16](https://github.com/marcelorodrigo/spring-crew-plugin/issues/16)) ([8fa1c1f](https://github.com/marcelorodrigo/spring-crew-plugin/commit/8fa1c1feed70f11f2bc58fc81279fc1e80494029))
+* **opencode:** add opencode plugin support ([#3](https://github.com/marcelorodrigo/spring-crew-plugin/issues/3)) ([29c24fa](https://github.com/marcelorodrigo/spring-crew-plugin/commit/29c24fa251c360f61bd11fe2cb9325dfbb5911cc))
+* Package Spring Crew agents as a GitHub Copilot plugin ([7383209](https://github.com/marcelorodrigo/spring-crew-plugin/commit/738320947b22c5864efe89d2188c196df5665aac))
+* Package Spring Crew agents as a GitHub Copilot plugin ([17e95d5](https://github.com/marcelorodrigo/spring-crew-plugin/commit/17e95d519e30cbdfaa80cadb04875edba8d96d16))
+* **plugin:** Package Spring Crew as Copilot CLI plugin with marketplace support ([5055704](https://github.com/marcelorodrigo/spring-crew-plugin/commit/505570439b2c13dfa5fc633141bce5b0022501ba))
+* rename npm package to @marcelorodrigo/opencode-spring-crew ([#8](https://github.com/marcelorodrigo/spring-crew-plugin/issues/8)) ([d5af85e](https://github.com/marcelorodrigo/spring-crew-plugin/commit/d5af85ebe5215f97d3c8b84099b28ced7059fa81))
+
+
+### Bug Fixes
+
+* **ci:** harden validate-plugin workflow ([b248532](https://github.com/marcelorodrigo/spring-crew-plugin/commit/b2485324e702a5434bb34692521ed2a75e27bdfa))
+* update README raw link from main to master branch ([#15](https://github.com/marcelorodrigo/spring-crew-plugin/issues/15)) ([7e855e4](https://github.com/marcelorodrigo/spring-crew-plugin/commit/7e855e4614a8f229a5bc8a1ea16e344f16d7b7be))
+
 ## [Unreleased]
 
 ### Changed
