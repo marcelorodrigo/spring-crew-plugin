@@ -220,6 +220,13 @@ jobs:
               "package.json $.version": pkg_version,
           }
 
+          # Check package-lock.json versions
+          with open("package-lock.json") as f:
+              lock = json.load(f)
+              version_sources["package-lock.json $.version"] = lock.get("version", "")
+              if "packages" in lock and "" in lock["packages"]:
+                  version_sources["package-lock.json $.packages[\"\"].version"] = lock["packages"][""].get("version", "")
+
           with open(".github/plugin/plugin.json") as f:
               version_sources[".github/plugin/plugin.json $.version"] = json.load(f).get("version", "")
 
@@ -227,8 +234,8 @@ jobs:
               market = json.load(f)
               version_sources[".github/plugin/marketplace.json $.metadata.version"] = market.get("metadata", {}).get("version", "")
               plugins = market.get("plugins", [])
-              if plugins:
-                  version_sources[".github/plugin/marketplace.json $.plugins[0].version"] = plugins[0].get("version", "")
+              for i, plugin in enumerate(plugins):
+                  version_sources[f".github/plugin/marketplace.json $.plugins[{i}].version"] = plugin.get("version", "")
 
           with open(".claude-plugin/plugin.json") as f:
               version_sources[".claude-plugin/plugin.json $.version"] = json.load(f).get("version", "")
@@ -236,8 +243,8 @@ jobs:
           with open(".claude-plugin/marketplace.json") as f:
               market = json.load(f)
               plugins = market.get("plugins", [])
-              if plugins:
-                  version_sources[".claude-plugin/marketplace.json $.plugins[0].version"] = plugins[0].get("version", "")
+              for i, plugin in enumerate(plugins):
+                  version_sources[f".claude-plugin/marketplace.json $.plugins[{i}].version"] = plugin.get("version", "")
               version_sources[".claude-plugin/marketplace.json $.metadata.version"] = market.get("metadata", {}).get("version", "")
 
           mismatches = []

@@ -43,7 +43,11 @@ jobs:
           count=0
           for agent_file in agents/*.agent.md; do
             agent_name=$(grep -m1 '^name: ' "$agent_file" | sed 's/^name: //')
-            if ! grep -q "$agent_name" dist/index.js; then
+            if [ -z "$agent_name" ]; then
+              echo "ERROR: Failed to extract agent name from $agent_file"
+              exit 1
+            fi
+            if ! grep -Fq -- "$agent_name" dist/index.js; then
               echo "ERROR: Agent prompt not found in bundle: $agent_name (from $agent_file)"
               exit 1
             fi
