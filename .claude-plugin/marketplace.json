@@ -4,7 +4,7 @@
     "name": "Marcelo Rodrigo"
   },
   "metadata": {
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description": "Marketplace for the Spring Crew AI development pipeline — five-agent Spring Boot crew with Clean Architecture and workflow orchestration"
   },
   "plugins": [
@@ -15,15 +15,15 @@
         "repo": "marcelorodrigo/spring-crew-plugin"
       },
       "description": "Five-agent AI crew for Spring Boot development with Clean Architecture. Includes Orchestrator (workflow management), Rubber Duck (brainstorming), Architect (design), Implementer (coding), and Code Reviewer: a full development pipeline in one plugin.",
-      "version": "0.2.0",
-       "author": {
-         "name": "Marcelo Rodrigo"
-       },
-       "contributors": [
-         {
-           "name": "Lucas Germani"
-         }
-       ],
+      "version": "0.3.0",
+      "author": {
+        "name": "Marcelo Rodrigo"
+      },
+      "contributors": [
+        {
+          "name": "Lucas Germani"
+        }
+      ],
       "homepage": "https://github.com/marcelorodrigo/spring-crew-plugin",
       "repository": "https://github.com/marcelorodrigo/spring-crew-plugin",
       "license": "MIT",
