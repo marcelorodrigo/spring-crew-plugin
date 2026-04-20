@@ -1,6 +1,6 @@
 {
   "name": "@marcelorodrigo/opencode-spring-crew",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Spring Boot development agents for opencode: Orchestrator, Rubber Duck, Architect, Implementer, Code Reviewer",
   "type": "module",
   "main": "dist/index.js",
