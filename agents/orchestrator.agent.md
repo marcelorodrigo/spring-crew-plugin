@@ -316,6 +316,7 @@ When all agents complete successfully (or workflow terminates early), produce:
 
 ## Final Artifacts
 
+<a id="brainstorm-brief"></a>
 <details>
 <summary><strong>Brainstorm Brief</strong> (from Rubber Duck)</summary>
 
@@ -323,6 +324,7 @@ When all agents complete successfully (or workflow terminates early), produce:
 
 </details>
 
+<a id="architecture-spec"></a>
 <details>
 <summary><strong>Architecture Spec</strong> (from Architect)</summary>
 
@@ -330,6 +332,7 @@ When all agents complete successfully (or workflow terminates early), produce:
 
 </details>
 
+<a id="implementation-summary"></a>
 <details>
 <summary><strong>Implementation Summary</strong> (from Implementer)</summary>
 
@@ -337,6 +340,7 @@ When all agents complete successfully (or workflow terminates early), produce:
 
 </details>
 
+<a id="code-review"></a>
 <details>
 <summary><strong>Code Review</strong> (from Code Reviewer)</summary>
 
