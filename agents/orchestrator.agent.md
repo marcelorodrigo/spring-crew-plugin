@@ -162,16 +162,27 @@ If artifact is missing required sections:
 **If mode is `human-in-loop` AND current agent is NOT code-reviewer:**
 
 1. **Present artifact to user:**
+
+   **CRITICAL — two-step output pattern (do NOT skip step A):**
+
+   **Step A — Output the full artifact as plain text FIRST**, before calling any tool:
+   ```
+   APPROVAL REQUIRED: {AGENT_NAME}
+
+   {Full artifact content from the agent}
+   ```
+
+   **Step B — After the artifact is fully visible to the user, call `ask_user`** with only the decision question and choices (do NOT embed artifact content inside the question string):
    ```
 Use the ask_user tool to present interactive options and capture the user's selection. Example call:
 
 ask_user({
-  "question": "APPROVAL REQUIRED: {AGENT_NAME}\n\n{First 1000 characters of artifact}\n\nYour decision?",
+  "question": "Review the {AGENT_NAME} output above. What is your decision?",
   "choices": [
-    "Approve — Proceed to next agent",
-    "Approve with comments — Proceed and attach comments",
-    "Request changes — Abort workflow",
-    "Provide custom input — Provide feedback to re-run agent"
+    "Approve: Proceed to next agent",
+    "Approve with comments: Proceed and attach comments",
+    "Request changes: Abort workflow",
+    "Provide custom input: Provide feedback to re-run agent"
   ],
   "allow_freeform": true
 })
@@ -518,25 +529,31 @@ Your task: JIRA-123: Add user authentication with JWT
 - Contains `## Explored Options`
 - Contains `## Recommendation`
 
-**Orchestrator presents for approval:**
+**Orchestrator presents for approval using the two-step pattern:**
+
+**Step A — Output the full artifact as plain text first:**
 ```text
 APPROVAL REQUIRED: RUBBER DUCK
+
 # Brainstorm Brief: User Authentication with JWT
 
 ## Problem Statement
 Users currently have no authentication mechanism...
 
-[... full artifact ...]
+[... full artifact content ...]
 ```
-Use the ask_user tool to present interactive options and capture the user's selection. Example:
+
+**Step B — After the artifact is visible, call ask_user with only the decision question:**
+```
+Use the ask_user tool to capture the user's selection. Example:
 
 ask_user({
-  "question": "Your decision?",
+  "question": "Review the Rubber Duck output above. What is your decision?",
   "choices": [
-    "Approve — Proceed to next agent",
-    "Approve with comments — Proceed and attach comments",
-    "Request changes — Abort workflow",
-    "Provide custom input — Provide feedback to re-run agent"
+    "Approve: Proceed to next agent",
+    "Approve with comments: Proceed and attach comments",
+    "Request changes: Abort workflow",
+    "Provide custom input: Provide feedback to re-run agent"
   ],
   "allow_freeform": true
 })
