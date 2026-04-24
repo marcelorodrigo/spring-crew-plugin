@@ -12,7 +12,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && tsc --emitDeclarationOnly",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit"
   },
@@ -32,7 +32,7 @@
     "@opencode-ai/plugin": "1.14.20",
     "@opencode-ai/sdk": "1.14.20",
     "tsup": "^8.0.0",
-    "typescript": "^5.7.0"
+    "typescript": "6.0.2"
   },
   "repository": {
     "type": "git",
