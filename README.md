@@ -360,23 +360,77 @@ _Nothing ships past the Code Reviewer without earning it. It diffs against maste
 
 ## 🔄 Updating
 
+### opencode
+
+**Manual.** opencode plugins are npm packages — they don't auto-update.
+
 ```bash
-# Copilot CLI
+npm update @marcelorodrigo/opencode-spring-crew
+```
+
+### Claude Code
+
+**Auto-update available.** Third-party marketplaces have auto-update **disabled** by default. To enable it:
+
+1. Run `/plugin`
+2. Go to the **Marketplaces** tab
+3. Select **spring-crew-plugin**
+4. Select **Enable auto-update**
+
+To update manually:
+
+```bash
+/plugin marketplace update spring-crew-plugin
+```
+
+### GitHub Copilot CLI
+
+**Manual.**
+
+```bash
 copilot plugin update spring-crew
 ```
 
-VS Code: Extensions view → Agent Plugins → **Update**.
+### VS Code
 
-opencode: Update the package version in your `opencode.json` or re-run your package manager.
+**Automatic.** VS Code checks for plugin updates every 24 hours when `extensions.autoUpdate` is enabled (the default). You can also check manually:
+
+1. Open the Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
+2. Run **Extensions: Check for Extension Updates**
 
 ---
 
 ## 🗑️ Uninstalling
 
+### opencode
+
+Remove the plugin from your `opencode.json`:
+
+```diff
+ {
+   "plugin": [
+-    "@marcelorodrigo/opencode-spring-crew"
+   ]
+ }
+```
+
+Then run `npm uninstall @marcelorodrigo/opencode-spring-crew` if installed locally.
+
+### Claude Code
+
 ```bash
-# Copilot CLI
+/plugin uninstall spring-crew@spring-crew-plugin
+```
+
+### GitHub Copilot CLI
+
+```bash
 copilot plugin uninstall spring-crew
 ```
+
+### VS Code
+
+Open the Extensions view (`Cmd+Shift+X` / `Ctrl+Shift+X`), find **Spring Crew** under **Agent Plugins — Installed**, right-click, and select **Uninstall**.
 
 ---
 
