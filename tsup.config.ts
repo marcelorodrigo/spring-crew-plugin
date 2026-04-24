@@ -9,4 +9,5 @@ export default defineConfig({
   loader: {
     '.md': 'text',
   },
+  onSuccess: 'cp -r skills dist/skills',
 });

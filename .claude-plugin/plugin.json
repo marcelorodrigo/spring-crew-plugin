@@ -21,5 +21,7 @@
     "agents",
     "code-review",
     "architecture"
-  ]
+  ],
+  "agents": "agents/",
+  "skills": "skills/"
 }

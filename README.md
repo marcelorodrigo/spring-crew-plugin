@@ -183,6 +183,33 @@ copilot plugin list
 
 ---
 
+## 🛠️ Bundled Skills
+
+Spring Crew ships with the **`web-design-guidelines`** skill from [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills), automatically available after installation — no extra steps needed.
+
+### web-design-guidelines
+
+Reviews UI code for compliance with 100+ Web Interface Guidelines rules across accessibility, performance, and UX.
+
+**Invoke when you say things like:**
+- _"Review my UI"_
+- _"Check accessibility"_
+- _"Audit design"_
+- _"Review UX"_
+- _"Check my site against best practices"_
+
+**Categories covered:** Accessibility · Focus States · Forms · Animation · Typography · Images · Performance · Navigation & State · Dark Mode · Touch & Interaction · Locale & i18n
+
+**Platform availability:**
+
+| Platform | Available |
+|---|---|
+| GitHub Copilot CLI | ✅ Auto-loaded from plugin `skills/` |
+| Claude Code | ✅ Auto-loaded from plugin `skills/` |
+| opencode | ✅ Auto-loaded via `skills.paths` config |
+
+---
+
 ## 🧠 Meet the Crew
 
 ### Orchestrator: The Pipeline Manager

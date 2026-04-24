@@ -1,5 +1,9 @@
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import type { Plugin } from '@opencode-ai/plugin';
 import { agents } from './agents';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const SpringCrewPlugin: Plugin = async (_ctx) => {
   return {
@@ -21,6 +25,18 @@ const SpringCrewPlugin: Plugin = async (_ctx) => {
           } else {
             configAgents[name] = { ...pluginAgent };
           }
+        }
+      }
+
+      const skillsDir = join(__dirname, 'skills');
+      if (!isPlainObject(opencodeConfig.skills)) {
+        opencodeConfig.skills = { paths: [skillsDir] };
+      } else {
+        const skills = opencodeConfig.skills;
+        if (!Array.isArray(skills.paths)) {
+          skills.paths = [skillsDir];
+        } else if (!skills.paths.includes(skillsDir)) {
+          skills.paths.push(skillsDir);
         }
       }
     },
