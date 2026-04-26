@@ -103,7 +103,13 @@ The pipeline is the recommended path, but each agent stands on its own.
 
 ### opencode
 
-Add to your `opencode.json`:
+**One-liner install (global):**
+
+```bash
+opencode plugin @marcelorodrigo/opencode-spring-crew --global
+```
+
+Or add manually to your `opencode.json`:
 
 ```json
 {
@@ -340,7 +346,13 @@ copilot plugin update spring-crew
 
 VS Code: Extensions view → Agent Plugins → **Update**.
 
-opencode: Update the package version in your `opencode.json` or re-run your package manager.
+opencode: Re-run the install command to get the latest version:
+
+```bash
+opencode plugin @marcelorodrigo/opencode-spring-crew --global
+```
+
+Or update the package version in your `opencode.json` manually.
 
 ---
 
