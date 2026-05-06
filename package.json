@@ -29,7 +29,7 @@
   "license": "MIT",
   "homepage": "https://github.com/marcelorodrigo/spring-crew-plugin",
   "devDependencies": {
-    "@opencode-ai/plugin": "1.14.20",
+    "@opencode-ai/plugin": "1.14.39",
     "@opencode-ai/sdk": "1.14.39",
     "tsup": "^8.0.0",
     "typescript": "6.0.3"
